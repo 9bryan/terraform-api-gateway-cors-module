@@ -19,6 +19,7 @@ PARAMS
 }
 
 resource "aws_api_gateway_method_response" "ResourceOptions200" {
+  depends_on = ["aws_api_gateway_method.ResourceOptions"]
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "OPTIONS"
