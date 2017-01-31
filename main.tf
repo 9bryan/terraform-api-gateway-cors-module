@@ -19,7 +19,10 @@ PARAMS
 }
 
 resource "aws_api_gateway_method_response" "ResourceOptions200" {
-  depends_on = ["aws_api_gateway_method.ResourceOptions"]
+  depends_on = [
+    "aws_api_gateway_method.ResourceOptions",
+    "aws_api_gateway_integration.ResourceOptionsIntegration"
+  ]
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "OPTIONS"
@@ -33,7 +36,11 @@ resource "aws_api_gateway_method_response" "ResourceOptions200" {
 }
 
 resource "aws_api_gateway_integration_response" "ResourceOptionsIntegrationResponse" {
-  depends_on = ["aws_api_gateway_method.ResourceOptions", "aws_api_gateway_method_response.ResourceOptions200", "aws_api_gateway_integration.ResourceOptionsIntegration"]
+  depends_on = [
+    "aws_api_gateway_method.ResourceOptions",
+    "aws_api_gateway_method_response.ResourceOptions200",
+    "aws_api_gateway_integration.ResourceOptionsIntegration"
+  ]
   rest_api_id = "${var.rest_api_id}"
   resource_id = "${var.resource_id}"
   http_method = "${aws_api_gateway_method.ResourceOptions.http_method}"
